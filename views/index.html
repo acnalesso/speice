@@ -1,0 +1,123 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="css/toolkit.css"/>
+    <link rel="stylesheet" href="css/skycons.min.css"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <title>BlueBox</title>
+    <style>
+      html, head, body { padding: 0; margin: 0; }
+      h1 { font-size: 68px !important; padding: 5% 0px; color: #fff; background-color: #0076be; }
+      ul {
+        width: 80%;
+        margin: 0 auto;
+      }
+      ul li {
+        list-style-type: circle;
+      }
+      div#presentation div {
+        display: none;
+        width: 80%;
+        height: 100%;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+
+  <body class=grid-1140>
+    <script type="text/javascript">
+      $(function() {
+        var slides = $('div#presentation div');
+        var totalOfSlides = slides.length
+        var previousSlide = 0;
+        var currentSlide = 0;
+        var nextSlide = 1;
+
+        slides.first().show();
+
+        var next = function() {
+          if (currentSlide > 0) {
+            if (typeof(slides[currentSlide]) !== 'undefined') {
+              $(slides[previousSlide]).fadeIn();
+              $(slides[currentSlide]).hide();
+              currentSlide--;
+              previousSlide = currentSlide-1;
+              nextSlide = currentSlide+1;
+            }
+          }
+        }
+
+        var previous = function() {
+          if (currentSlide < totalOfSlides) {
+            if (typeof(slides[nextSlide]) !== 'undefined') {
+              $(slides[currentSlide]).hide();
+              $(slides[nextSlide]).fadeIn();
+              nextSlide++;
+              previousSlide = currentSlide;
+              currentSlide = nextSlide-1;
+            }
+          }
+        }
+
+        $(document).on('keydown', function(e) {
+          var keyCode = e.keyCode;
+
+          // <------
+          if (keyCode === 37 )
+            next();
+
+          // ------->
+          if (keyCode === 39)
+            previous();
+        });
+
+      });
+    </script>
+    <div id=presentation>
+
+      <div id=slide_0 class=grid12>
+          <h1 class=page-title>&nbsp;&nbsp;BlueBox</h1>
+          <br />
+          <br />
+          <br />
+          <p class=section-title style="width: 80%; margin: 0 auto;">
+          {<br/>
+            &nbsp;&nbsp;name: "Antonio Nalesso"</br>
+          }
+          </p>
+      </div>
+
+      <div id=slide_1 class=grid12>
+        <h1 class=page-title>&nbsp;&nbsp;Demo</h1>
+        <h3 class=section-title>Awesome Sky Website</h3>
+        <ul>
+          <li class="section-title smaller">GET - Customer Overview</li>
+          <li class="section-title smaller">GET - Customer details</li>
+          <li class="section-title smaller">GET|PUT - Parental Controls Settings</li>
+          <li class="section-title smaller">GET - Custom service</li>
+        </ul>
+      </div>
+
+      <div id=slide_2 class=grid12>
+        <h1 class=page-title>&nbsp;&nbsp;Environments</h1>
+        <h3 class=section-title>PRODUCTION</h3>
+        <h3 class=section-title>E05</h3>
+      </div>
+
+      <div id=slide_3 class=grid12>
+        <h1 class=page-title>&nbsp;&nbsp;What is missing?</h1>
+        <ul>
+          <li class="section-title smaller">HTTPS Certs</li>
+          <li class="section-title smaller">JSON Lint</li>
+          <li class="section-title smaller">Oauth authentication</li>
+          <li class="section-title smaller">Precise Metrics</li>
+          <li class="section-title smaller">Customisation</li>
+            <ul>
+              <li class="section-title smaller">Allow devs to change http headers such as Cache-Control</li>
+            </ul>
+          <li class="section-title smaller">Your Contribution</li>
+        </ul>
+      </div>
+
+    </div>
+  </body>
+</html>
