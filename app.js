@@ -3,20 +3,23 @@ var app = express();
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
 
-
 app.use("/css", express.static(__dirname + "/css"));
 app.use("/js", express.static(__dirname + "/js"));
 
 app.get("/", function(req, res) {
-    res.sendfile(__dirname + "/views/index.html");
+  res.sendfile(__dirname + "/views/index.html");
+});
+
+app.get("/control", function(req, res) {
+  res.sendfile(__dirname + "/views/control.html");
 });
 
 io.on("connection", function(socket) {
-    socket.on("Pi", function(data) {
-      io.emit("Pi", data);
-    });
+  socket.on("change", function(data) {
+    io.emit("change", { keyCode: data.keyCode });
+  });
 });
 
 server.listen((process.env.PORT || 1234), function() {
-    console.log("App started! on: localhost:1234")
+  console.log("App started on: localhost:1234");
 });

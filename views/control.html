@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Control</title>
+    <meta name="viewport" content="width=device-width">
+    <link type=text/css rel=stylesheet href=/css/font-awesome.min.css>
+    <link href='http://fonts.googleapis.com/css?family=Sarpanch:700' rel='stylesheet' type='text/css'>
+    <link type=text/css rel=stylesheet href=/css/index.css>
+  </head>
+  <body>
+
+    <div class=container>
+      <div class="button left"><i class="fa fa-arrow-circle-left"></i></div>
+      <div class="button right"><i class="fa fa-arrow-circle-right"></i></div>
+    </div>
+
+    <script type=text/javascript src=/js/jquery.js></script>
+    <script type=text/javascript src=/socket.io/socket.io.js></script>
+
+    <script type=text/javascript>
+      $(function() {
+        var socket =  io.connect("http://localhost.bskyb.com:1234");
+
+        $(document).on("click", ".container div", function(e) {
+          var keyCode = e.currentTarget.className.match(/right/) ? 39 : 37
+          console.log(e.currentTarget.className.match(/right/));
+          socket.emit("change", { keyCode: keyCode });
+        });
+      });
+    </script>
+
+  </body>
+</html>

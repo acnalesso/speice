@@ -2,6 +2,7 @@
   <head>
     <link rel="stylesheet" href="css/toolkit.css"/>
     <link rel="stylesheet" href="css/skycons.min.css"/>
+    <script type=text/javascript src=/socket.io/socket.io.js></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <title>BlueBox</title>
     <style>
@@ -26,6 +27,7 @@
   <body class=grid-1140>
     <script type="text/javascript">
       $(function() {
+        var socket = io.connect("http://localhost.bskyb.com:1234");
         var slides = $('div#presentation div');
         var totalOfSlides = slides.length
         var previousSlide = 0;
@@ -34,7 +36,7 @@
 
         slides.first().show();
 
-        var next = function() {
+        window.previous = function() {
           if (currentSlide > 0) {
             if (typeof(slides[currentSlide]) !== 'undefined') {
               $(slides[previousSlide]).fadeIn();
@@ -44,9 +46,9 @@
               nextSlide = currentSlide+1;
             }
           }
-        }
+        };
 
-        var previous = function() {
+        window.next = function() {
           if (currentSlide < totalOfSlides) {
             if (typeof(slides[nextSlide]) !== 'undefined') {
               $(slides[currentSlide]).hide();
@@ -58,16 +60,28 @@
           }
         }
 
+        socket.on('change', function(data) {
+          console.log('index '+ data);
+          if (data.keyCode === 37) {
+            previous();
+          }
+
+          if (data.keyCode === 39) {
+            next();
+          }
+        });
+
         $(document).on('keydown', function(e) {
           var keyCode = e.keyCode;
+          console.log(keyCode);
 
           // <------
           if (keyCode === 37 )
-            next();
+            previous();
 
           // ------->
           if (keyCode === 39)
-            previous();
+            next();
         });
 
       });

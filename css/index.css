@@ -1,0 +1,36 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #EFECCA;
+  font-family: 'Sarpanch', sans-serif;
+  text-align: center;
+}
+
+.container {
+  margin: 30px auto;
+  width: 320px;
+}
+
+.button {
+  padding: 0 10px 10px 10px;
+  font-size: 140px;
+  color: #046380;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.left {
+  float: left
+}
+
+.right {
+  float: right;
+}
+
+.button:hover {
+  color: #023240;
+}
+
+.centre:hover, .speed span:hover {
+  background-color: #023240;
+}
