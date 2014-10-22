@@ -33,6 +33,7 @@
         var previousSlide = 0;
         var currentSlide = 0;
         var nextSlide = 1;
+        var verticalPosition = 0;
 
         slides.first().show();
 
@@ -58,16 +59,36 @@
               currentSlide = nextSlide-1;
             }
           }
+        };
+
+        window.up = function() {
+          window.scrollTo(0, verticalPosition+=10);
+        }
+
+        window.down = function() {
+          window.scrollTo(0, verticalPosition-=10);
         }
 
         socket.on('change', function(data) {
-          console.log('index '+ data);
+
           if (data.keyCode === 37) {
             previous();
           }
 
+          if (data.keyCode === 38) {
+            if (window.pageYOffset <= verticalPosition)
+              //checks whether we have reched the bottom of the page
+              if (!(window.pageYOffset + window.innerHeight >= document.body.scrollHeight))
+                up();
+          }
+
           if (data.keyCode === 39) {
             next();
+          }
+
+          if (data.keyCode === 40) {
+            if (window.pageYOffset > 0)
+              down();
           }
         });
 
@@ -79,9 +100,15 @@
           if (keyCode === 37 )
             previous();
 
+          if (keyCode === 38 )
+            up();
+
           // ------->
           if (keyCode === 39)
             next();
+
+          if (keyCode === 40)
+            down();
         });
 
       });
