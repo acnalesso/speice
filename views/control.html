@@ -10,20 +10,27 @@
   <body>
 
     <div class=container>
-      <div class="button left"><i class="fa fa-arrow-circle-left"></i></div>
-      <div class="button right"><i class="fa fa-arrow-circle-right"></i></div>
-
       <div class="button up">UP</div>
+      <div class="button left">LEFT</div>
+      <div class="button right">RIGHT</div>
       <div class="button down">DOWN</div>
 
     </div>
 
     <script type=text/javascript src=/js/jquery.js></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.mobile.min.js"></script>
     <script type=text/javascript src=/socket.io/socket.io.js></script>
 
     <script type=text/javascript>
       $(function() {
-        var socket =  io.connect("http://localhost.bskyb.com:1234");
+        var socket =  io.connect(document.URL.replace("/control", ""));
+
+        $('.up, .down').on('taphold', function(e) {
+          e.preventDefault();
+          var keyCode = e.currentTarget.className.match(/up/) ? 40 : 38
+          socket.emit('change', { keyCode: keyCode, loop: true });
+
+        });
 
         $(document).on("click", ".container div", function(e) {
           var keyCode = e.currentTarget.className.match(/right/) ? 39 : 37

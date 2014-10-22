@@ -16,7 +16,8 @@ app.get("/control", function(req, res) {
 
 io.on("connection", function(socket) {
   socket.on("change", function(data) {
-    io.emit("change", { keyCode: data.keyCode });
+    console.log(data);
+    io.emit("change", data);
   });
 });
 

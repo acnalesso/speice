@@ -25,94 +25,8 @@
   </head>
 
   <body class=grid-1140>
-    <script type="text/javascript">
-      $(function() {
-        var socket = io.connect("http://localhost.bskyb.com:1234");
-        var slides = $('div#presentation div');
-        var totalOfSlides = slides.length
-        var previousSlide = 0;
-        var currentSlide = 0;
-        var nextSlide = 1;
-        var verticalPosition = 0;
+    <script type="text/javascript" src="/js/index.js"></script>
 
-        slides.first().show();
-
-        window.previous = function() {
-          if (currentSlide > 0) {
-            if (typeof(slides[currentSlide]) !== 'undefined') {
-              $(slides[previousSlide]).fadeIn();
-              $(slides[currentSlide]).hide();
-              currentSlide--;
-              previousSlide = currentSlide-1;
-              nextSlide = currentSlide+1;
-            }
-          }
-        };
-
-        window.next = function() {
-          if (currentSlide < totalOfSlides) {
-            if (typeof(slides[nextSlide]) !== 'undefined') {
-              $(slides[currentSlide]).hide();
-              $(slides[nextSlide]).fadeIn();
-              nextSlide++;
-              previousSlide = currentSlide;
-              currentSlide = nextSlide-1;
-            }
-          }
-        };
-
-        window.up = function() {
-          window.scrollTo(0, verticalPosition+=10);
-        }
-
-        window.down = function() {
-          window.scrollTo(0, verticalPosition-=10);
-        }
-
-        socket.on('change', function(data) {
-
-          if (data.keyCode === 37) {
-            previous();
-          }
-
-          if (data.keyCode === 38) {
-            if (window.pageYOffset <= verticalPosition)
-              //checks whether we have reched the bottom of the page
-              if (!(window.pageYOffset + window.innerHeight >= document.body.scrollHeight))
-                up();
-          }
-
-          if (data.keyCode === 39) {
-            next();
-          }
-
-          if (data.keyCode === 40) {
-            if (window.pageYOffset > 0)
-              down();
-          }
-        });
-
-        $(document).on('keydown', function(e) {
-          var keyCode = e.keyCode;
-          console.log(keyCode);
-
-          // <------
-          if (keyCode === 37 )
-            previous();
-
-          if (keyCode === 38 )
-            up();
-
-          // ------->
-          if (keyCode === 39)
-            next();
-
-          if (keyCode === 40)
-            down();
-        });
-
-      });
-    </script>
     <div id=presentation>
 
       <div class=grid12>
@@ -153,10 +67,25 @@
       </div>
 
       <div class=grid12>
-        <h1 class=page-title>&nbsp;&nbsp;Demo</h1>
-        <h3 class=section-title>Awesome Sky Website</h3>
+        <h1 class=section-title>Awesome Sky Website</h1>
+        <h3 class=page-title>&nbsp;&nbsp;Demo</h3>
         <ul>
-          <li class="section-title smaller">How to integrate your app with BlueBox</li>
+          <li class="section-title smaller">
+            How to integrate your app with BlueBox
+            <ul>
+              <li class="section-title smaller">Sky Team Token?</li>
+              <li class="section-title smaller">SkySSO</li>
+            </ul>
+          </li>
+
+          <li class="section-title smaller">
+            Environments
+            <ul>
+              <li class="section-title smaller">PRODUCTION</li>
+              <li class="section-title smaller">E05</li>
+            </ul>
+          </li>
+
           <li class="section-title smaller">GET - Customer Overview</li>
           <li class="section-title smaller">GET - Customer details</li>
           <li class="section-title smaller">GET | PUT - Parental Controls Settings</li>
@@ -165,24 +94,33 @@
       </div>
 
       <div class=grid12>
-        <h1 class=page-title>&nbsp;&nbsp;Environments</h1>
-        <h3 class=section-title>PRODUCTION</h3>
-        <h3 class=section-title>E05</h3>
-      </div>
-
-      <div class=grid12>
         <h1 class=page-title>&nbsp;&nbsp;What is missing?</h1>
         <ul>
           <li class="section-title smaller">JSON Lint</li>
-          <li class="section-title smaller">Oauth authentication</li>
+          <li class="section-title smaller">Open Authentication (OAuth)</li>
           <li class="section-title smaller">Precise Metrics?</li>
           <li class="section-title smaller">Customisation</li>
             <ul>
               <li class="section-title smaller">Allow devs to change http headers such as Cache-Control</li>
             </ul>
           <li class="section-title smaller">More Convention Over Configuration</li>
-          <li class="section-title smaller">Your Contribution</li>
+          <li class="section-title smaller">---> Your Contribution <---</li>
         </ul>
+      </div>
+
+      <div class=grid12>
+        <h1 class=page-title>---> ABC <---</h1>
+        <h3 class=page-title>A lways<br /> B e<br /> C oding</h3>
+      </div>
+
+      <div class=grid12>
+        <h1 class=page-title>I want to scroll UP and DOWN</h1>
+        <img src="http://i1.ytimg.com/vi/Dgosi8Mp41Q/hqdefault.jpg" width=400 height=500 /><br />
+        <img src="http://static.squarespace.com/static/509fe56de4b046b42951dc40/t/5119792de4b0033a72ad27bb/1360623918090/BlueBox1.jpg" width=400 height=500 /><br />
+        <img src="http://www.clker.com/cliparts/k/1/H/C/r/G/blue-box-hi.png" width=400 height=500 /><br />
+        <img src="http://upload.wikimedia.org/wikipedia/commons/5/5f/Blue_Box_in_museum.jpg" width=400 height=500 /><br />
+        <img src="http://myoldmac.net/FAQ/picts/Wozniaks_blue_box.102627263.lg.jpg" width=400 height=500 /><br />
+        <img src="http://cache0.bigcartel.com/product_images/44538071/TheBlueBox_-_2.jpg" width=400 height=500 /><br />
       </div>
 
     </div>
