@@ -51,26 +51,28 @@ $(function() {
 
       scroller = setInterval(function() {
         if (data.keyCode === 38) {
+          verticalPosition += 25;
+          up();
+
           if (window.pageYOffset <= verticalPosition) {
             if (window.pageYOffset + window.innerHeight >= document.body.scrollHeight) {
               clearInterval(scroller);
               scrolling = false;
             }
           }
-
-          verticalPosition += 25;
-          up();
         }
 
 
         if (data.keyCode === 40) {
+          verticalPosition -= 25;
+          down();
+
           if (window.pageYOffset === 0) {
+            verticalPosition = 0;
             clearInterval(scroller);
             scrolling = false;
           }
 
-          verticalPosition -= 25;
-          down();
         }
       }, 150);
     }
